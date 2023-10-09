@@ -10,7 +10,9 @@ export default defineConfig({
     retries: 2,
     // Artifacts folder where screenshots, videos, and traces are stored.
     outputDir: 'test-results/',
-
+    // Restricted to running tests one-by-one sequentially for stability
+    workers: 1,
+    fullyParallel: false,
     use: {
         // Retry a test if its failing with enabled tracing.
         // Allows for us to analyze DOM, console logs, network traffic, etc.

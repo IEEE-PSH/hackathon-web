@@ -1,5 +1,4 @@
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
-import { RedirectType, redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 
@@ -19,7 +18,7 @@ export default authMiddleware({
     }
   },
   publicRoutes: ["/"],
-  debug: false
+  debug: true
 });
 
 export const config = {
