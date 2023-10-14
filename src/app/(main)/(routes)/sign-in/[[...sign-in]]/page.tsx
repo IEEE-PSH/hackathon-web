@@ -1,14 +1,14 @@
-import { Metadata } from "next"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { UserAuthForm } from "@/components/user-auth-form"
-import { ModeToggle } from "@/components/ui/mode-toggle"
+import { Metadata } from "next";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { UserAuthForm } from "@/components/user-auth-form";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export const metadata: Metadata = {
   title: "HackPSH - Sign In",
   description: "Get back to the competition!",
-}
+};
 
 export default function SignIn() {
   return (
@@ -67,5 +67,5 @@ export default function SignIn() {
         </div>
       </div>
     </>
-  )
+  );
 }

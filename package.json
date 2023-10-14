@@ -44,6 +44,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "cypress": "^13.3.1",
     "dotenv": "^16.3.1",
     "eslint": "latest",
     "eslint-config-next": "latest",
