@@ -1,0 +1,114 @@
+{
+  "result": "success",
+  "message": null,
+  "count": 3,
+  "limit": 10,
+  "offset": 0,
+  "emails": [
+    {
+      "cc": "",
+      "date": 1697258532000,
+      "attachments": [],
+      "dkim": "none",
+      "envelope_to": "q5m8r.test@inbox.testmail.app",
+      "subject": "Confirm Your Signup",
+      "SPF": "pass",
+      "messageId": "<0100018b2c7dee36-27885569-e1db-4cf0-b132-16244e75c3dd-000000@email.amazonses.com>",
+      "to_parsed": [
+        {
+          "address": "q5m8r.test@inbox.testmail.app",
+          "name": ""
+        }
+      ],
+      "oid": "31017-q5m8r-urYhyejtHE57iZV9Zya7AQ",
+      "envelope_from": "0100018b2c7dee36-27885569-e1db-4cf0-b132-16244e75c3dd-000000@amazonses.com",
+      "cc_parsed": [],
+      "namespace": "q5m8r",
+      "from": "noreply@mail.app.supabase.io",
+      "sender_ip": "please see headers",
+      "html": "<h2>Confirm your signup</h2>\n\n<p>Follow this link to confirm your user:</p>\n<p><a href=\"https://rgrzaemfzeskdxdvvsdu.supabase.co/auth/v1/verify?token=pkce_88deca3e69967f4fbc1a65fe7196ec753a2e318dd46aa64685686b21&amp;type=signup&amp;redirect_to=http://localhost:3000/api/auth/callback\">Confirm your mail</a></p>\n  <div style=\" width: 100%; margin: auto 0; padding: 0; font-family: Lato, sans-serif; font-size: 18px; color: #33475b; word-break: break-word; \"><div id=\"made-with-supabase\" style=\"width: 100%;margin-top: 32px;margin-bottom: 32px;\"> <table role=\"presentation\" width=\"100%\"><tr><td align=\"center\" style=\"color: white\"> <a id=\"made-with-supabase--text\" style=\"color: #aaa;cursor: pointer;font-family: 'Lato', sans-serif;font-size: 12px;text-align: center;margin-top: 10px;\" href=\"https://supabase.com/?utm_source=auth-email&utm_medium=email&utm_campaign=powered-by-supabase\">Powered by Supabase ⚡️</a></td></tr></table></div></div>\n  \n",
+      "to": "q5m8r.test@inbox.testmail.app",
+      "tag": "test",
+      "text": "CONFIRM YOUR SIGNUP\nFollow this link to confirm your user:\n\nConfirm your mail\n[https://rgrzaemfzeskdxdvvsdu.supabase.co/auth/v1/verify?token=pkce_88deca3e69967f4fbc1a65fe7196ec753a2e318dd46aa64685686b21&type=signup&redirect_to=http://localhost:3000/api/auth/callback]\n\nPowered by Supabase ⚡️\n[https://supabase.com/?utm_source=auth-email&utm_medium=email&utm_campaign=powered-by-supabase]",
+      "from_parsed": [
+        {
+          "address": "noreply@mail.app.supabase.io",
+          "name": ""
+        }
+      ],
+      "timestamp": 1697258533115,
+      "id": "31017-q5m8r-urYhyejtHE57iZV9Zya7AQ",
+      "downloadUrl": "https://object.testmail.app/api/31017-q5m8r-urYhyejtHE57iZV9Zya7AQ.eml"
+    },
+    {
+      "cc": "",
+      "date": 1697258403000,
+      "attachments": [],
+      "dkim": "none",
+      "envelope_to": "q5m8r.test@inbox.testmail.app",
+      "subject": "Confirm Your Signup",
+      "SPF": "pass",
+      "messageId": "<0100018b2c7bf5aa-454a185f-d53d-4473-aee6-7dd4a36fc571-000000@email.amazonses.com>",
+      "to_parsed": [
+        {
+          "address": "q5m8r.test@inbox.testmail.app",
+          "name": ""
+        }
+      ],
+      "oid": "31017-q5m8r-3EJTYK4XnJaoo3didY3Emj",
+      "envelope_from": "0100018b2c7bf5aa-454a185f-d53d-4473-aee6-7dd4a36fc571-000000@amazonses.com",
+      "cc_parsed": [],
+      "namespace": "q5m8r",
+      "from": "noreply@mail.app.supabase.io",
+      "sender_ip": "please see headers",
+      "html": "<h2>Confirm your signup</h2>\n\n<p>Follow this link to confirm your user:</p>\n<p><a href=\"https://rgrzaemfzeskdxdvvsdu.supabase.co/auth/v1/verify?token=pkce_d080ff1aeee805f773d3382fa911011c5c13dfbb1320d8f5aee1b348&amp;type=signup&amp;redirect_to=http://localhost:3000/api/auth/callback\">Confirm your mail</a></p>\n  <div style=\" width: 100%; margin: auto 0; padding: 0; font-family: Lato, sans-serif; font-size: 18px; color: #33475b; word-break: break-word; \"><div id=\"made-with-supabase\" style=\"width: 100%;margin-top: 32px;margin-bottom: 32px;\"> <table role=\"presentation\" width=\"100%\"><tr><td align=\"center\" style=\"color: white\"> <a id=\"made-with-supabase--text\" style=\"color: #aaa;cursor: pointer;font-family: 'Lato', sans-serif;font-size: 12px;text-align: center;margin-top: 10px;\" href=\"https://supabase.com/?utm_source=auth-email&utm_medium=email&utm_campaign=powered-by-supabase\">Powered by Supabase ⚡️</a></td></tr></table></div></div>\n  \n",
+      "to": "q5m8r.test@inbox.testmail.app",
+      "tag": "test",
+      "text": "CONFIRM YOUR SIGNUP\nFollow this link to confirm your user:\n\nConfirm your mail\n[https://rgrzaemfzeskdxdvvsdu.supabase.co/auth/v1/verify?token=pkce_d080ff1aeee805f773d3382fa911011c5c13dfbb1320d8f5aee1b348&type=signup&redirect_to=http://localhost:3000/api/auth/callback]\n\nPowered by Supabase ⚡️\n[https://supabase.com/?utm_source=auth-email&utm_medium=email&utm_campaign=powered-by-supabase]",
+      "from_parsed": [
+        {
+          "address": "noreply@mail.app.supabase.io",
+          "name": ""
+        }
+      ],
+      "timestamp": 1697258404227,
+      "id": "31017-q5m8r-3EJTYK4XnJaoo3didY3Emj",
+      "downloadUrl": "https://object.testmail.app/api/31017-q5m8r-3EJTYK4XnJaoo3didY3Emj.eml"
+    },
+    {
+      "cc": "",
+      "date": 1697255552000,
+      "attachments": [],
+      "dkim": "none",
+      "envelope_to": "q5m8r.test@inbox.testmail.app",
+      "subject": "asd",
+      "SPF": "pass",
+      "messageId": "<CH2PR02MB6053800301045FF7AA3A81FABDD1A@CH2PR02MB6053.namprd02.prod.outlook.com>",
+      "to_parsed": [
+        {
+          "address": "q5m8r.test@inbox.testmail.app",
+          "name": ""
+        }
+      ],
+      "oid": "31017-q5m8r-nKA2NU2gRdmcv8yS2SuuYY",
+      "envelope_from": "jnn5163@psu.edu",
+      "cc_parsed": [],
+      "namespace": "q5m8r",
+      "from": "Nguyen, John Nhat <jnn5163@psu.edu>",
+      "sender_ip": "please see headers",
+      "html": "<html xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:w=\"urn:schemas-microsoft-com:office:word\" xmlns:m=\"http://schemas.microsoft.com/office/2004/12/omml\" xmlns=\"http://www.w3.org/TR/REC-html40\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\">\n<meta name=\"Generator\" content=\"Microsoft Word 15 (filtered medium)\">\n<style><!--\n/* Font Definitions */\n@font-face\n\t{font-family:\"Cambria Math\";\n\tpanose-1:2 4 5 3 5 4 6 3 2 4;}\n@font-face\n\t{font-family:Calibri;\n\tpanose-1:2 15 5 2 2 2 4 3 2 4;}\n/* Style Definitions */\np.MsoNormal, li.MsoNormal, div.MsoNormal\n\t{margin:0in;\n\tfont-size:11.0pt;\n\tfont-family:\"Calibri\",sans-serif;}\na:link, span.MsoHyperlink\n\t{mso-style-priority:99;\n\tcolor:blue;\n\ttext-decoration:underline;}\n.MsoChpDefault\n\t{mso-style-type:export-only;}\n@page WordSection1\n\t{size:8.5in 11.0in;\n\tmargin:1.0in 1.0in 1.0in 1.0in;}\ndiv.WordSection1\n\t{page:WordSection1;}\n--></style>\n</head>\n<body lang=\"EN-US\" link=\"blue\" vlink=\"#954F72\" style=\"word-wrap:break-word\">\n<div class=\"WordSection1\">\n<p class=\"MsoNormal\"><o:p>&nbsp;</o:p></p>\n<p class=\"MsoNormal\">test</p>\n<p class=\"MsoNormal\">Sent from <a href=\"https://go.microsoft.com/fwlink/?LinkId=550986\">\nMail</a> for Windows</p>\n<p class=\"MsoNormal\"><o:p>&nbsp;</o:p></p>\n</div>\n</body>\n</html>\n",
+      "to": "q5m8r.test@inbox.testmail.app",
+      "tag": "test",
+      "text": "\ntest\nSent from Mail<https://go.microsoft.com/fwlink/?LinkId=550986> for Windows\n\n",
+      "from_parsed": [
+        {
+          "address": "jnn5163@psu.edu",
+          "name": "Nguyen, John Nhat"
+        }
+      ],
+      "timestamp": 1697255556265,
+      "id": "31017-q5m8r-nKA2NU2gRdmcv8yS2SuuYY",
+      "downloadUrl": "https://object.testmail.app/api/31017-q5m8r-nKA2NU2gRdmcv8yS2SuuYY.eml"
+    }
+  ]
+}
