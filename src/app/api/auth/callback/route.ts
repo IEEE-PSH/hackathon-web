@@ -1,7 +1,8 @@
 import { siteConfig } from "@/app/_config/site";
-import { composeServerClient } from "@/app/_lib/supabase/server";
-import { cookies } from "next/headers";
+import { type CookieOptions, createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 /**
  * This route handles users who use magic link sign-in (email),
@@ -14,6 +15,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * @param request
  * @returns New User Session through Cookies
  */
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
@@ -21,40 +23,51 @@ export async function GET(request: NextRequest) {
 
   const param_error = searchParams.get("error");
   const param_error_reason = searchParams.get("error_description");
-  console.log("P", param_error);
-  console.log("P", param_error_reason);
+
   if (code) {
-    const cookieStore = cookies();
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      {
+        cookies: {
+          get(name: string) {
+            return request.cookies.get(name)?.value;
+          },
+          set(name: string, value: string, options: CookieOptions) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            request.cookies.set({ name, value, ...options });
+          },
+          remove(name: string, options: CookieOptions) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            request.cookies.delete({ name, ...options });
+          },
+        },
+      },
+    );
 
-    const supabase = composeServerClient(cookieStore);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    console.log("P", error);
-    // Successfully acquired session
+    console.log(data);
+    console.log(error);
     if (!error) {
       return NextResponse.redirect(
         new URL(siteConfig.paths.dashboard, request.url),
+        {
+          headers: request.headers,
+        },
       );
     }
-
-    // Error exchanging code for session
-    return NextResponse.redirect(
-      new URL(
-        `${siteConfig.paths.sign_in}?error=${error?.name}&error_description=${error?.message}`,
-        request.url,
-      ),
-    );
   }
 
-  // GoTrueClient Returned with Auth Flow Error
-  if (param_error) {
-    return NextResponse.redirect(
-      new URL(
-        `${
-          siteConfig.paths.sign_in
-        }?error=${param_error}&error_description=${param_error_reason!}`,
-        request.url,
-      ),
-    );
-  }
+  console.log(param_error);
+  // // GoTrueClient Returned with Auth Flow Error
+  // if (param_error) {
+  //   return NextResponse.redirect(
+  //     new URL(
+  //       `${
+  //         siteConfig.paths.sign_in
+  //       }?error=${param_error}&error_description=${param_error_reason!}`,
+  //       request.url,
+  //     ),
+  //   );
 }
