@@ -15,6 +15,7 @@ export function composeServerClient(cookieStore: ReturnType<typeof cookies>) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             cookieStore.set({ name, value, ...options });
           } catch (error) {
+            console.error("S", error);
             // The `set` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
             // user sessions.
@@ -25,6 +26,7 @@ export function composeServerClient(cookieStore: ReturnType<typeof cookies>) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             cookieStore.delete({ name, ...options });
           } catch (error) {
+            console.error("S", error);
             // The `delete` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
             // user sessions.

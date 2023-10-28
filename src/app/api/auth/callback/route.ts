@@ -1,5 +1,5 @@
 import { siteConfig } from "@/app/_config/site";
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { composeServerClient } from "@/app/_lib/supabase/server";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -21,32 +21,15 @@ export async function GET(request: NextRequest) {
 
   const param_error = searchParams.get("error");
   const param_error_reason = searchParams.get("error_description");
-
+  console.log("P", param_error);
+  console.log("P", param_error_reason);
   if (code) {
     const cookieStore = cookies();
 
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      {
-        cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value;
-          },
-          set(name: string, value: string, options: CookieOptions) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            cookieStore.set({ name, value, ...options });
-          },
-          remove(name: string, options: CookieOptions) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            cookieStore.delete({ name, ...options });
-          },
-        },
-      },
-    );
+    const supabase = composeServerClient(cookieStore);
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
-
+    console.log("P", error);
     // Successfully acquired session
     if (!error) {
       return NextResponse.redirect(

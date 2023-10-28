@@ -57,9 +57,9 @@ export async function middleware(request: NextRequest) {
     error,
   } = await supabase.auth.getSession();
 
-  console.log(request.nextUrl.pathname);
-  console.log(error);
-  console.log(session);
+  console.log("M", request.nextUrl.href);
+  console.log("M", error);
+  console.log("M", session);
 
   // If a user does not have a valid session or encounters
   // an error when retrieving a valid session, redirect to sign in.
