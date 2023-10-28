@@ -3,8 +3,8 @@ import { Button } from "./button";
 import { cn } from "@/app/_lib/client-utils";
 import Link from "next/link";
 import { siteConfig } from "@/app/_config/site";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { composeServerClient } from "@/app/_lib/supabase/server";
 
 type SignInButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -15,7 +15,7 @@ type SignInButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
  */
 export async function SessionButton({ className }: SignInButtonProps) {
   const cookieStore = cookies();
-  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  const supabase = composeServerClient(cookieStore);
 
   const { data: { session } } = await supabase.auth.getSession();
 

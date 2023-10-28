@@ -1,11 +1,7 @@
 import { siteConfig } from "@/app/_config/site";
-import {
-  redirectToPath,
-  redirectToSignInWithError,
-} from "@/app/_lib/server-utils";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 /**
  * This route handles users who use magic link sign-in (email),
@@ -18,34 +14,64 @@ import { type NextRequest } from "next/server";
  * @param request
  * @returns New User Session through Cookies
  */
-export async function GET(req: NextRequest) {
-  const requestUrl = new URL(req.url);
-  const code = requestUrl.searchParams.get("code");
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
 
-  const error_reason = requestUrl.searchParams.get("error");
-  const error_description = requestUrl.searchParams.get("error_description");
+  const code = searchParams.get("code");
+
+  const param_error = searchParams.get("error");
+  const param_error_reason = searchParams.get("error_description");
 
   if (code) {
     const cookieStore = cookies();
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
-    const { data } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (data.session == null) {
-      return redirectToSignInWithError(
-        req,
-        "invalid_session",
-        "Session was not able to be acquired.",
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value;
+          },
+          set(name: string, value: string, options: CookieOptions) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            cookieStore.set({ name, value, ...options });
+          },
+          remove(name: string, options: CookieOptions) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            cookieStore.delete({ name, ...options });
+          },
+        },
+      },
+    );
+
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+    // Successfully acquired session
+    if (!error) {
+      return NextResponse.redirect(
+        new URL(siteConfig.paths.dashboard, request.url),
       );
     }
 
-    // TODO: Create Logic from session to query against db in order to redirect to onboarding or dashboard appropriately
-    // This is the only entry point to our application
-    return redirectToPath(req, siteConfig.paths.dashboard);
+    // Error exchanging code for session
+    return NextResponse.redirect(
+      new URL(
+        `${siteConfig.paths.sign_in}?error=${error?.name}&error_description=${error?.message}`,
+        request.url,
+      ),
+    );
   }
 
-  // If the exchange for a valid session generates an error, supabase hits our callback route with
-  // the following: `?error=unauthorized_client&error_code=401&error_description=Email+link+is+invalid+or+has+expired`
-  if (error_reason) {
-    return redirectToSignInWithError(req, error_reason, error_description!);
+  // GoTrueClient Returned with Auth Flow Error
+  if (param_error) {
+    return NextResponse.redirect(
+      new URL(
+        `${
+          siteConfig.paths.sign_in
+        }?error=${param_error}&error_description=${param_error_reason!}`,
+        request.url,
+      ),
+    );
   }
 }

@@ -17,21 +17,30 @@ import {
 import { Button } from "@/app/_components/ui/button";
 import { useRouter } from "next/navigation";
 import { siteConfig } from "@/app/_config/site";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "@/app/_components/ui/use-toast";
+import { createBrowserClient } from "@supabase/ssr";
 
 export default function ProfileDropdown() {
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
   const router = useRouter();
-  const supabase = createClientComponentClient();
   const { setTheme } = useTheme();
 
   async function handleSignOut() {
-    await supabase.auth.signOut();
-    router.replace(siteConfig.paths.home);
     toast({
       description: "Signing out...",
       duration: 2000,
       variant: "default"
+    })
+    await supabase.auth.signOut();
+    router.push(siteConfig.paths.home);
+    toast({
+      description: "Signed Out Successfully!",
+      duration: 2000,
+      variant: "success"
     })
   }
 

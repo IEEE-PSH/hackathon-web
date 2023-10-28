@@ -28,5 +28,23 @@ namespace NodeJS {
      * @type {string}
      */
     VERCEL_URL: string;
+
+    /**
+     * Supabase Anonymous Key to access Serverless APIs.
+     * @see https://supabase.com/docs/guides/api/api-keys
+     * 
+     * This key is safe to use in a browser if you have enabled Row Level Security 
+     * for your tables and configured policies.
+     * @type {string}
+     */
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: string
+
+    /**
+     * Supabase Project URL.
+     * 
+     * A RESTful endpoint for querying and managing your database.
+     * @type {string}
+     */
+    NEXT_PUBLIC_SUPABASE_URL: string
   }
 }
