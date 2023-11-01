@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const ReviewFormSchema = z.object({
-  review_rate: z.boolean(),
-  review_message: z.string().min(10).max(500),
+  //review_rate: z.boolean(),
+  review_message: z.string().min(10,"Message must be at least 10 characters.").max(500,"Message must be less than 500 characters."),
 });
 export const BugReportFormSchema = z.object({
-    bug_report_message: z.string().min(10).max(500),
+    bug_report_message: z.string().min(10,"Message must be at least 10 characters.").max(500,"Message must be less than 500 characters."),
 });
 
 export type TReviewForm = z.infer<typeof ReviewFormSchema>;

@@ -1,50 +1,57 @@
 import React from "react";
-import { CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
+import { CardTitle } from "@/app/_components/ui/card";
+import { Textarea } from "@/app/_components/ui/textarea";
 import { useForm } from "react-hook-form";
 import SubmitButton from "@/app/_components/feedback/submit-button";
-import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ReviewFormSchema, TReviewForm } from "@/app/_lib/zod-schemas/feedback";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+  } from "@/app/_components/ui/form"
 
-const reviewFormSchema = z.object({
-  review: z
-    .string()
-    .min(1, "Message is required")
-    .max(500, "Message exceeds 500 characters"),
-});
+export default function reviewForm() {
+    const form = useForm<TReviewForm>({
+        resolver:zodResolver(ReviewFormSchema)
+    })
 
-export default function reviewForm({
-  setIsSubmitting,
-}: {
-  setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  const form = 
-
-  function onSubmit(){
-
-  }
+    async function onSubmit(values : TReviewForm){
+      //delay so reset doesn't rerender whole component immediately
+      await new Promise((resolve) => setTimeout(resolve, 1));
+      console.log(values.review_message)
+      form.reset({review_message:""});
+    }
 
   return (
-    <form
-      id="reviewForm"
-      onSubmit={form.handleSubmit(onSubmit)}
-    >
-      <CardTitle className="mt-[12px] mb-[18px] text-[19px]">
-        How was your experience?
-      </CardTitle>
-      <Textarea
-        {...register("review")}
-        className="h-[250px]"
-        placeholder="Tell us more."
-        disabled={isSubmitting}
-      ></Textarea>
-      {errors.review && (
-        <p className="absolute mt-1 text-sm text-red-500">{`${errors.review.message}`}</p>
-      )}
-      <SubmitButton
-        isSubmitting={isSubmitting}
-        isSubmitSuccessful={isSubmitSuccessful}
-      />
-    </form>
+    <Form {...form}>
+        <CardTitle className="mt-[12px] mb-[18px] text-[19px]">
+                How was your experience?
+            </CardTitle>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField control={form.control} name="review_message"
+            render={({field})=>(
+                <FormItem>
+                    <FormControl>
+                    <Textarea
+                        {...field}
+                        className="h-[250px] resize-none"
+                        placeholder="Tell us more."
+                        disabled={form.formState.isSubmitting}
+                    ></Textarea>
+                    </FormControl>
+                    <FormMessage/>
+                </FormItem>
+            )}/>
+            <SubmitButton
+                isSubmitting={form.formState.isSubmitting}
+                isSubmitSuccessful={form.formState.isSubmitSuccessful}
+            />
+        </form>
+    </Form>
   );
 }
