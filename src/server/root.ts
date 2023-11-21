@@ -1,5 +1,6 @@
 import { announcementsRouter } from "./routers/announcements";
 import { authRouter } from "./routers/auth";
+// import { feedbackRouter } from "./routers/feedback";
 import { leaderboardRouter } from "./routers/leaderboard";
 import { teamRouter } from "./routers/team";
 import { userRouter } from "./routers/user";
@@ -11,6 +12,7 @@ export const appRouter = createTRPCRouter({
   leaderboard: leaderboardRouter,
   announcements: announcementsRouter,
   team: teamRouter,
+  // Add Feedback Router to Root Router
 });
 
 export type AppRouter = typeof appRouter;
