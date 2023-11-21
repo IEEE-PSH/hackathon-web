@@ -1,6 +1,6 @@
-// import { createFeedbackReport } from "@/server/dao/feedback";
-// import { publicProcedure } from "@/server/trpc";
-// import { z } from "zod";
+import { createFeedbackReport } from "@/server/dao/feedback";
+import { publicProcedure } from "@/server/trpc";
+import { z } from "zod";
 
 // Goal A: Create a Zod Input Schema in order to validate the input
 // that will be received by the API for sanitization.
@@ -14,6 +14,12 @@
 // const CreateFeedbackReportSchema = z.object({
 //
 // })
+const CreateFeedbackReportSchema = z.object({
+  author_uuid: z.string().uuid("Please provide a valid UUID."),
+  feedback_report: z
+    .string()
+    .min(1, "Report must at least have a single character"),
+});
 
 // Create a public procedure that sanitizes the input from your zod schema
 // and performs a mutation to the database which creates a feedback report
@@ -22,3 +28,12 @@
 // export default publicProcedure
 // .input()
 // .mutation(async ({ ctx, input }) => {}
+export default publicProcedure
+  .input(CreateFeedbackReportSchema)
+  .mutation(async ({ ctx, input }) => {
+    await createFeedbackReport(
+      ctx.db,
+      input.author_uuid,
+      input.feedback_report,
+    );
+  });
