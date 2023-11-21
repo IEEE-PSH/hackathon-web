@@ -95,4 +95,12 @@ export const app_onboarding_phase = app_schema.table("app_onboarding_phase", {
 // feedback_author_uuid: uuid notNull references app_user_profile.user_uid
 // feedback_report: text notNull
 
-// Run the command pnpm migrate to apply these changes
+// Run the command pnpm migrate to apply these
+export const app_feedback = app_schema.table("app_feedback", {
+  feedback_id: serial("feedback_id").primaryKey(),
+  feedback_timestamp: timestamp("feedback_timestamp").notNull().defaultNow(),
+  feedback_author_uuid: uuid("feedback_author_uuid")
+    .notNull()
+    .references(() => app_user_profile.user_uuid),
+  feedback_report: text("feedback_report").notNull(),
+});
