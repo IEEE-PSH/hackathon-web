@@ -88,3 +88,11 @@ export const app_onboarding_phase = app_schema.table("app_onboarding_phase", {
   phase_id: serial("phase_id").primaryKey(),
   phase_name: text("phase_name").notNull().unique(),
 });
+
+// Create app_feedback with the following fields
+// feedback_id: auto_incrementing number aka serial as the primaryKey
+// feedback_timestamp: timestamp notNull defaultNow
+// feedback_author_uuid: uuid notNull references app_user_profile.user_uid
+// feedback_report: text notNull
+
+// Run the command pnpm migrate to apply these changes
